@@ -31,7 +31,7 @@ class Settings(BaseSettings):
 	PROTECTED_BALANCE: int = 0
 	DAY_MAIN_DELAY: int = 3600
 	NIGHT_MAIN_DELAY: int = 10800
-	REF_CODE: str = 'hero5726822287'
+	REF_CODE: str = 'hero398750825'
 
 	SLEEP_BETWEEN_START: list[int] = [20, 360]
 	ERRORS_BEFORE_STOP: int = 3

@@ -1,8 +1,6 @@
-# Bot for [X Empire](https://alexell.pro/cc/xempire) (Musk Empire)
+# Bot for [X Empire](https://t.me/empirebot/game?startapp=hero398750825) (Musk Empire)
 
 ![img1](.github/images/demo.png)
-
-> 🇷🇺 README на русском доступен [здесь](README-RU.md)
 
 ## Functionality
 | Feature                               | Supported  |

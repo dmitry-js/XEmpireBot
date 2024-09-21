@@ -38,40 +38,50 @@ async def register_sessions() -> None:
 	log.success(f"Session added successfully: {user_data.username or user_data.id} | "
                    f"{user_data.first_name or ''} {user_data.last_name or ''}")
 
-def get_proxies() -> list[Proxy]:
-	if config.USE_PROXY_FROM_FILE:
-		with open(file='proxies.txt', encoding='utf-8') as file:
-			proxies = sorted([Proxy.from_str(proxy=row.strip()).as_url for row in file if row.strip()])
-	else:
-		proxies = []
-
-	return proxies
+def get_proxies() -> dict[str, Proxy]:
+    proxies = {}
+    if config.USE_PROXY_FROM_FILE:
+        with open(file="proxies.txt", encoding="utf-8-sig") as file:
+            session_name = None
+            for row in file:
+                row = row.strip()
+                if row:
+                    if session_name is None:
+                        session_name = row
+                    else:
+                        proxy = Proxy.from_str(proxy=row).as_url
+                        proxies[session_name] = proxy
+                        session_name = None
+    return proxies
 
 def get_session_data(sessions: list) -> dict:
-	data_file = 'session_data.json'
-	data = {}
-	if os.path.exists(data_file):
-		try:
-			with open(file=data_file, encoding='utf-8') as file:
-				data = json.load(file)
-		except Exception as error:
-			log.error(f"Error when loading session data: {error}")
-	
-	all_data_exists = True if all(session in data for session in sessions) else False
-	if not all_data_exists:
-		ua = UserAgent(os=['android'])
-		proxies = get_proxies()
-		proxies_cycle = cycle(proxies) if proxies else cycle([None])
-		for session in sessions:
-			if not session in data:
-				useragent = ua.random
-				proxy = next(proxies_cycle)
-				data[session] = {'ua': useragent, 'proxy': proxy}
-		
-		with open(data_file, 'w', encoding='utf-8') as file:
-			json.dump(data, file, ensure_ascii=False, indent=4)
-	
-	return data
+    data_file = 'session_data.json'
+    data = {}
+
+    if os.path.exists(data_file):
+        try:
+            with open(file=data_file, encoding='utf-8') as file:
+                data = json.load(file)
+        except Exception as error:
+            log.error(f"Error when loading session data: {error}")
+
+    all_data_exists = all(session in data for session in sessions)
+
+    if not all_data_exists:
+        ua = UserAgent(os=['android'])
+        proxies = get_proxies()
+
+        for session in sessions:
+            if session not in data:
+                useragent = ua.random
+                proxy = proxies.get(session)
+
+                data[session] = {'ua': useragent, 'proxy': proxy}
+
+        with open(data_file, 'w', encoding='utf-8') as file:
+            json.dump(data, file, ensure_ascii=False, indent=4)
+
+    return data
 
 async def get_tg_clients() -> tuple[list[Client], dict]:
 	session_names = get_session_names()

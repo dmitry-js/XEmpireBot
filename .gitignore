@@ -112,3 +112,6 @@ Thumbs.db
 
 # Virtual Studio Code, more commonly
 .vs/
+
+session_data.json
+app.log
