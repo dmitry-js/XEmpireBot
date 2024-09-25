@@ -19,7 +19,7 @@
 | Automatic skill improvement           |     ✅     |
 | Docker                                |     ✅     |
 
-## [Options](https://github.com/Alexell/XEmpireBot/blob/main/.env-example)
+## Options
 | Option                  | Description                                                                                |
 |-------------------------|--------------------------------------------------------------------------------------------|
 | **API_ID / API_HASH**   | Platform data for launching a Telegram session                                             |
@@ -63,7 +63,7 @@ If you want to protect a certain amount of money in the balance, set the desired
 3. Use `START.bat` to launch the bot (or in the console: `python main.py`).
 
 ### Linux
-1. Clone the repository: `git clone https://github.com/Alexell/XEmpireBot.git && cd XEmpireBot`
+1. Clone the repository: `git clone https://github.com/dmitry-js/XEmpireBot.git && cd XEmpireBot`
 
 **Attention:** If you are using **Python 3.12**, before proceeding to the next step, you need to either remove the `TgCrypto` line from `requirements.txt` (TgCrypto is not critical) or install the required software for automatic compilation of this package during installation:
 ```shell
@@ -74,7 +74,7 @@ apt install build-essential python3-dev
 
 ## Running in Docker
 ```
-$ git clone https://github.com/Alexell/XEmpireBot.git
+$ git clone https://github.com/dmitry-js/XEmpireBot.git
 $ cd XEmpireBot
 $ cp .env-example .env
 $ nano .env # specify your API_ID and API_HASH, the rest can be left as default
@@ -93,9 +93,9 @@ $ docker run -d --restart unless-stopped --name XEmpireBot -v .:/app xempire_bot
 ```
 
 ## Manual installation
-You can download [**Repository**](https://github.com/Alexell/XEmpireBot) by cloning it to your system and installing the necessary dependencies:
+You can download [**Repository**](https://github.com/dmitry-js/XEmpireBot) by cloning it to your system and installing the necessary dependencies:
 ```
-$ git clone https://github.com/Alexell/XEmpireBot.git
+$ git clone https://github.com/dmitry-js/XEmpireBot.git
 $ cd XEmpireBot
 
 # Linux
